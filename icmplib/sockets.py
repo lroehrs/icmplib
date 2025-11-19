@@ -170,9 +170,12 @@ class ICMPSocket:
         # SO_BINDTODEVICE requires CAP_NET_RAW capability on Linux
         # Interface name must be encoded to bytes
         try:
+            # Try to get SO_BINDTODEVICE constant, fallback to 25 for compatibility
+            SO_BINDTODEVICE = getattr(socket, "SO_BINDTODEVICE", 25)
             self._sock.setsockopt(
                 socket.SOL_SOCKET,
                 25,  # SO_BINDTODEVICE
+                SO_BINDTODEVICE,
                 interface.encode(),
             )
         except (OSError, AttributeError) as err:

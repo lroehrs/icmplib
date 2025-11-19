@@ -143,7 +143,7 @@ def ping(address, count=4, interval=1, timeout=2, id=None, source=None,
     packets_sent = 0
     rtts = []
 
-    with _Socket(source, privileged) as sock:
+    with _Socket(source, privileged, interface) as sock:
         for sequence in range(count):
             if sequence > 0:
                 sleep(interval)
@@ -282,7 +282,7 @@ async def async_ping(address, count=4, interval=1, timeout=2, id=None,
     packets_sent = 0
     rtts = []
 
-    with AsyncSocket(_Socket(source, privileged)) as sock:
+    with AsyncSocket(_Socket(source, privileged, interface)) as sock:
         for sequence in range(count):
             if sequence > 0:
                 await asyncio.sleep(interval)
