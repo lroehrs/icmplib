@@ -69,6 +69,15 @@ ping(address, count=4, interval=1, timeout=2, id=None, source=None, family=None,
   - Type: `bool`
   - Default: `True`
 
+- `interface`
+
+  The network interface to bind to (e.g., 'eth0', 'wlan0'). By default, the socket is not bound to a specific interface.
+
+  *Only available on Unix systems. Ignored on Windows.*
+
+  - Type: `str`
+  - Default: `None`
+
 - `payload`
 
   The payload content in bytes. A random payload is used by default.
@@ -164,7 +173,7 @@ True
 Send ICMP Echo Request packets to several network hosts.
 
 ```python
-multiping(addresses, count=2, interval=0.5, timeout=2, concurrent_tasks=50, source=None, family=None, privileged=True, **kwargs)
+multiping(addresses, count=2, interval=0.5, timeout=2, concurrent_tasks=50, source=None, family=None, privileged=True, interface=None, **kwargs)
 ```
 
 #### Parameters
@@ -227,6 +236,15 @@ multiping(addresses, count=2, interval=0.5, timeout=2, concurrent_tasks=50, sour
 
   - Type: `bool`
   - Default: `True`
+
+- `interface`
+
+  The network interface to bind to (e.g., 'eth0', 'wlan0'). By default, the socket is not bound to a specific interface.
+
+  *Only available on Unix systems. Ignored on Windows.*
+
+  - Type: `str`
+  - Default: `None`
 
 - `payload`
 
@@ -306,7 +324,7 @@ The Internet is a large and complex aggregation of network hardware, connected t
 *This function requires root privileges to run.*
 
 ```python
-traceroute(address, count=2, interval=0.05, timeout=2, first_hop=1, max_hops=30, fast=False, id=None, source=None, family=None, **kwargs)
+traceroute(address, count=2, interval=0.05, timeout=2, first_hop=1, max_hops=30, fast=False, id=None, source=None, family=None, interface=None, **kwargs)
 ```
 
 #### Parameters
@@ -378,6 +396,15 @@ traceroute(address, count=2, interval=0.05, timeout=2, first_hop=1, max_hops=30,
   The address family if a hostname or FQDN is specified. Can be set to `4` for IPv4 or `6` for IPv6 addresses. By default, this function searches for IPv4 addresses first before searching for IPv6 addresses.
 
   - Type: `int`
+  - Default: `None`
+
+- `interface`
+
+  The network interface to bind to (e.g., 'eth0', 'wlan0'). By default, the socket is not bound to a specific interface.
+
+  *Only available on Unix systems. Ignored on Windows.*
+
+  - Type: `str`
   - Default: `None`
 
 - `payload`
@@ -465,7 +492,7 @@ Send ICMP Echo Request packets to a network host.
 *This function is non-blocking.*
 
 ```python
-async_ping(address, count=4, interval=1, timeout=2, id=None, source=None, family=None, privileged=True, **kwargs)
+async_ping(address, count=4, interval=1, timeout=2, id=None, source=None, family=None, privileged=True, interface=None, **kwargs)
 ```
 
 #### Parameters, return value and exceptions
@@ -495,7 +522,7 @@ Send ICMP Echo Request packets to several network hosts.
 *This function is non-blocking.*
 
 ```python
-async_multiping(addresses, count=2, interval=0.5, timeout=2, concurrent_tasks=50, source=None, family=None, privileged=True, **kwargs)
+async_multiping(addresses, count=2, interval=0.5, timeout=2, concurrent_tasks=50, source=None, family=None, privileged=True, interface=None, **kwargs)
 ```
 
 #### Parameters, return value and exceptions

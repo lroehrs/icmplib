@@ -33,7 +33,7 @@ from .ping import async_ping
 
 async def async_multiping(addresses, count=2, interval=0.5, timeout=2,
         concurrent_tasks=50, source=None, family=None, privileged=True,
-        **kwargs):
+        interface=None, **kwargs):
     '''
     Send ICMP Echo Request packets to several network hosts.
 
@@ -82,6 +82,11 @@ async def async_multiping(addresses, count=2, interval=0.5, timeout=2,
         root privileges and let the kernel handle ICMP headers.
         Default to True.
         Only available on Unix systems. Ignored on Windows.
+
+    :type interface: str, optional
+    :param interface: The network interface to bind to (e.g., 'eth0',
+        'wlan0'). By default, the socket is not bound to a specific
+        interface. Only available on Unix systems. Ignored on Windows.
 
     Advanced (**kwags):
 
@@ -153,6 +158,7 @@ async def async_multiping(addresses, count=2, interval=0.5, timeout=2,
                 source=source,
                 family=family,
                 privileged=privileged,
+                interface=interface,
                 **kwargs))
 
         tasks.append(task)
@@ -165,7 +171,7 @@ async def async_multiping(addresses, count=2, interval=0.5, timeout=2,
 
 def multiping(addresses, count=2, interval=0.5, timeout=2,
         concurrent_tasks=50, source=None, family=None, privileged=True,
-        **kwargs):
+        interface=None, **kwargs):
     '''
     Send ICMP Echo Request packets to several network hosts.
 
@@ -212,6 +218,12 @@ def multiping(addresses, count=2, interval=0.5, timeout=2,
         root privileges and let the kernel handle ICMP headers.
         Default to True.
         Only available on Unix systems. Ignored on Windows.
+
+    :type interface: str, optional
+    :param interface: The network interface to bind to (e.g., 'eth0',
+        'wlan0'). By default, the socket is not bound to a specific
+        interface. Only available on Unix systems. Ignored on Windows.
+
 
     Advanced (**kwags):
 
@@ -274,4 +286,5 @@ def multiping(addresses, count=2, interval=0.5, timeout=2,
             source=source,
             family=family,
             privileged=privileged,
+            interface=interface,
             **kwargs))

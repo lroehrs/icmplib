@@ -153,7 +153,7 @@ ICMPReply(source, family, id, sequence, type, code, bytes_received, time)
 Class for sending and receiving ICMPv4 packets.
 
 ```python
-ICMPv4Socket(address=None, privileged=True)
+ICMPv4Socket(address=None, privileged=True, interface=None)
 ```
 
 #### Parameters
@@ -174,9 +174,18 @@ ICMPv4Socket(address=None, privileged=True)
   - Type: `bool`
   - Default: `True`
 
+- `interface`
+
+  The network interface to bind to (e.g., 'eth0', 'wlan0'). By default, the socket is not bound to a specific interface.
+
+  *Only available on Unix systems. Ignored on Windows.*
+
+  - Type: `str`
+  - Default: `None`
+
 #### Methods
 
-- `__init__(address=None, privileged=True)`
+- `__init__(address=None, privileged=True, interface=None)`
 
   *Constructor. Automatically called: do not call it directly.*
 
@@ -280,7 +289,7 @@ ICMPv4Socket(address=None, privileged=True)
 Class for sending and receiving ICMPv6 packets.
 
 ```python
-ICMPv6Socket(address=None, privileged=True)
+ICMPv6Socket(address=None, privileged=True, interface=None)
 ```
 
 #### Methods and properties

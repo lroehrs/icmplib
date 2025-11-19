@@ -89,7 +89,7 @@ Use the built-in functions or build your own, you have the choice!
 Send ICMP Echo Request packets to a network host.
 
 ```python
-ping(address, count=4, interval=1, timeout=2, id=None, source=None, family=None, privileged=True, **kwargs)
+ping(address, count=4, interval=1, timeout=2, id=None, source=None, family=None, privileged=True, interface=None, **kwargs)
 ```
 
 #### Parameters
@@ -152,6 +152,15 @@ ping(address, count=4, interval=1, timeout=2, id=None, source=None, family=None,
 
   - Type: `bool`
   - Default: `True`
+
+- `interface`
+
+  The network interface to bind to (e.g., 'eth0', 'wlan0'). By default, the socket is not bound to a specific interface.
+
+  *Only available on Unix systems. Ignored on Windows.*
+
+  - Type: `str`
+  - Default: `None`
 
 - `payload`
 
@@ -248,7 +257,7 @@ True
 Send ICMP Echo Request packets to several network hosts.
 
 ```python
-multiping(addresses, count=2, interval=0.5, timeout=2, concurrent_tasks=50, source=None, family=None, privileged=True, **kwargs)
+multiping(addresses, count=2, interval=0.5, timeout=2, concurrent_tasks=50, source=None, family=None, privileged=True, interface=None, **kwargs)
 ```
 
 #### Parameters
@@ -311,6 +320,15 @@ multiping(addresses, count=2, interval=0.5, timeout=2, concurrent_tasks=50, sour
 
   - Type: `bool`
   - Default: `True`
+
+- `interface`
+
+  The network interface to bind to (e.g., 'eth0', 'wlan0'). By default, the socket is not bound to a specific interface.
+
+  *Only available on Unix systems. Ignored on Windows.*
+
+  - Type: `str`
+  - Default: `None`
 
 - `payload`
 
@@ -549,7 +567,7 @@ Send ICMP Echo Request packets to a network host.
 *This function is non-blocking.*
 
 ```python
-async_ping(address, count=4, interval=1, timeout=2, id=None, source=None, family=None, privileged=True, **kwargs)
+async_ping(address, count=4, interval=1, timeout=2, id=None, source=None, family=None, privileged=True, interface=None, **kwargs)
 ```
 
 #### Parameters, return value and exceptions
@@ -579,7 +597,7 @@ Send ICMP Echo Request packets to several network hosts.
 *This function is non-blocking.*
 
 ```python
-async_multiping(addresses, count=2, interval=0.5, timeout=2, concurrent_tasks=50, source=None, family=None, privileged=True, **kwargs)
+async_multiping(addresses, count=2, interval=0.5, timeout=2, concurrent_tasks=50, source=None, family=None, privileged=True, interface=None, **kwargs)
 ```
 
 #### Parameters, return value and exceptions

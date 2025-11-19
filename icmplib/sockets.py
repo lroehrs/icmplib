@@ -51,6 +51,11 @@ class ICMPSocket:
         headers. Default to True.
         Only available on Unix systems. Ignored on Windows.
 
+    :type interface: str, optional
+    :param interface: The network interface to bind to (e.g., 'eth0',
+        'wlan0'). By default, the socket is not bound to a specific
+        interface. Only available on Unix systems. Ignored on Windows.
+
     :raises SocketPermissionError: If the privileges are insufficient to
         create the socket.
     :raises SocketAddressError: If the requested address cannot be
@@ -59,7 +64,7 @@ class ICMPSocket:
         socket.
 
     '''
-    __slots__ = '_sock', '_address', '_privileged'
+    __slots__ = '_sock', '_address', '_privileged', '_interface'
 
     _IP_VERSION              = -1
     _ICMP_HEADER_OFFSET      = -1
@@ -74,9 +79,10 @@ class ICMPSocket:
     _ICMP_ECHO_REQUEST       = -1
     _ICMP_ECHO_REPLY         = -1
 
-    def __init__(self, address=None, privileged=True):
+    def __init__(self, address=None, privileged=True, interface=None):
         self._sock = None
         self._address = address
+        self._interface = interface
 
         # The Linux kernel allows unprivileged users to use datagram
         # sockets (SOCK_DGRAM) to send ICMP requests. This feature is
@@ -91,6 +97,9 @@ class ICMPSocket:
 
             if address:
                 self._sock.bind((address, 0))
+
+            if interface:
+                self._bind_to_device(interface)
 
         except OSError as err:
             if err.errno in (1, 13, 10013):
@@ -145,6 +154,28 @@ class ICMPSocket:
 
         '''
         raise NotImplementedError
+
+    def _bind_to_device(self, interface):
+        '''
+        Bind the socket to a specific network interface.
+
+        Only available on Unix systems. Ignored on Windows.
+
+        '''
+        # Not available on Windows
+        if PLATFORM_WINDOWS:
+            return
+
+        # SO_BINDTODEVICE requires CAP_NET_RAW capability on Linux
+        # Interface name must be encoded to bytes
+        try:
+            self._sock.setsockopt(
+                socket.SOL_SOCKET,
+                25,  # SO_BINDTODEVICE
+                interface.encode(),
+            )
+        except (OSError, AttributeError) as err:
+            raise ICMPSocketError(f"Cannot bind to interface {interface}: {err}")
 
     def _checksum(self, data):
         '''

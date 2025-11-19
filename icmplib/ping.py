@@ -36,7 +36,7 @@ from .utils import *
 
 
 def ping(address, count=4, interval=1, timeout=2, id=None, source=None,
-        family=None, privileged=True, **kwargs):
+        family=None, privileged=True, interface=None, **kwargs):
     '''
     Send ICMP Echo Request packets to a network host.
 
@@ -81,6 +81,11 @@ def ping(address, count=4, interval=1, timeout=2, id=None, source=None,
         root privileges and let the kernel handle ICMP headers.
         Default to True.
         Only available on Unix systems. Ignored on Windows.
+
+    :type interface: str, optional
+    :param interface: The network interface to bind to (e.g., 'eth0',
+        'wlan0'). By default, the socket is not bound to a specific
+        interface. Only available on Unix systems. Ignored on Windows.
 
     Advanced (**kwags):
 
@@ -166,7 +171,7 @@ def ping(address, count=4, interval=1, timeout=2, id=None, source=None,
 
 
 async def async_ping(address, count=4, interval=1, timeout=2, id=None,
-        source=None, family=None, privileged=True, **kwargs):
+        source=None, family=None, privileged=True, interface=None, **kwargs):
     '''
     Send ICMP Echo Request packets to a network host.
 
@@ -213,6 +218,12 @@ async def async_ping(address, count=4, interval=1, timeout=2, id=None,
         root privileges and let the kernel handle ICMP headers.
         Default to True.
         Only available on Unix systems. Ignored on Windows.
+
+    :type interface: str, optional
+    :param interface: The network interface to bind to (e.g., 'eth0',
+        'wlan0'). By default, the socket is not bound to a specific
+        interface. Only available on Unix systems. Ignored on Windows.
+
 
     Advanced (**kwags):
 

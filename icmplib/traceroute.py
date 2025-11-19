@@ -36,7 +36,7 @@ from .utils import *
 
 def traceroute(address, count=2, interval=0.05, timeout=2, first_hop=1,
         max_hops=30, fast=False, id=None, source=None, family=None,
-        **kwargs):
+        interface=None, **kwargs):
     '''
     Determine the route to a destination host.
 
@@ -94,6 +94,11 @@ def traceroute(address, count=2, interval=0.05, timeout=2, first_hop=1,
         Can be set to `4` for IPv4 or `6` for IPv6 addresses. By default,
         this function searches for IPv4 addresses first before searching
         for IPv6 addresses.
+
+    :type interface: str, optional
+    :param interface: The network interface to bind to (e.g., 'eth0',
+        'wlan0'). By default, the socket is not bound to a specific
+        interface. Only available on Unix systems. Ignored on Windows.
 
     Advanced (**kwags):
 
@@ -167,7 +172,7 @@ def traceroute(address, count=2, interval=0.05, timeout=2, first_hop=1,
     host_reached = False
     hops = []
 
-    with _Socket(source) as sock:
+    with _Socket(source, True, interface) as sock:
         while not host_reached and ttl <= max_hops:
             reply = None
             packets_sent = 0
