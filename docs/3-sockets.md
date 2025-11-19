@@ -176,9 +176,9 @@ ICMPv4Socket(address=None, privileged=True, interface=None)
 
 - `interface`
 
-  The network interface to bind to (e.g., 'eth0', 'wlan0'). By default, the socket is not bound to a specific interface.
+  The network interface to bind to (e.g., `'lo'`, `'eth0'`, `'wlan0'`). By default, the socket is not bound to a specific interface.
 
-  *Only available on Unix systems. Ignored on Windows.*
+  *Only available on Linux. Ignored on macOS and Windows.*
 
   - Type: `str`
   - Default: `None`

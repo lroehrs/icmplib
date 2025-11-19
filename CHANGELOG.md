@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 - Add `interface` parameter to bind sockets to a specific network interface.
   - Available in `ping`, `multiping`, `traceroute`, `async_ping`, and `async_multiping` functions.
   - Available in `ICMPv4Socket` and `ICMPv6Socket` classes.
-  - Only available on Unix systems. Ignored on Windows.
+  - Only available on Linux. Ignored on macOS and Windows.
 
 ## [v3.0.4](https://github.com/ValentinBELYN/icmplib/releases/tag/v3.0.4) - 2023-10-10
 - Fix licensing inconsistencies.

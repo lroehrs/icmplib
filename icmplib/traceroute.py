@@ -98,7 +98,7 @@ def traceroute(address, count=2, interval=0.05, timeout=2, first_hop=1,
     :type interface: str, optional
     :param interface: The network interface to bind to (e.g., 'eth0',
         'wlan0'). By default, the socket is not bound to a specific
-        interface. Only available on Unix systems. Ignored on Windows.
+        interface. Only available on Linux. Ignored on macOS and Windows.
 
     Advanced (**kwags):
 

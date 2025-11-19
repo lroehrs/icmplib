@@ -54,7 +54,7 @@ class ICMPSocket:
     :type interface: str, optional
     :param interface: The network interface to bind to (e.g., 'eth0',
         'wlan0'). By default, the socket is not bound to a specific
-        interface. Only available on Unix systems. Ignored on Windows.
+        interface. Only available on Linux. Ignored on macOS and Windows.
 
     :raises SocketPermissionError: If the privileges are insufficient to
         create the socket.
@@ -159,13 +159,14 @@ class ICMPSocket:
         '''
         Bind the socket to a specific network interface.
 
-        Only available on Unix systems. Ignored on Windows.
+        Only available on Linux. Ignored on macOS and Windows.
 
         '''
-        # Not available on Windows
-        if PLATFORM_WINDOWS:
+        # Not available on Windows or macOS
+        if PLATFORM_WINDOWS or PLATFORM_MACOS:
             return
 
+        # Linux uses SO_BINDTODEVICE
         # SO_BINDTODEVICE requires CAP_NET_RAW capability on Linux
         # Interface name must be encoded to bytes
         try:
