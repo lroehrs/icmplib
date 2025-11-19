@@ -74,6 +74,8 @@ ping(address, count=4, interval=1, timeout=2, id=None, source=None, family=None,
   The network interface to bind to (e.g., `'lo'`, `'eth0'`, `'wlan0'`). By default, the socket is not bound to a specific interface.
 
   *Only available on Linux. Ignored on macOS and Windows.*
+  
+  *This function requires root privileges to run.*
 
   - Type: `str`
   - Default: `None`
@@ -242,6 +244,8 @@ multiping(addresses, count=2, interval=0.5, timeout=2, concurrent_tasks=50, sour
   The network interface to bind to (e.g., `'lo'`, `'eth0'`, `'wlan0'`). By default, the socket is not bound to a specific interface.
 
   *Only available on Linux. Ignored on macOS and Windows.*
+  
+  *This function requires root privileges to run.*
 
   - Type: `str`
   - Default: `None`
@@ -403,6 +407,8 @@ traceroute(address, count=2, interval=0.05, timeout=2, first_hop=1, max_hops=30,
   The network interface to bind to (e.g., `'lo'`, `'eth0'`, `'wlan0'`). By default, the socket is not bound to a specific interface.
 
   *Only available on Linux. Ignored on macOS and Windows.*
+  
+  *This function requires root privileges to run.*
 
   - Type: `str`
   - Default: `None`
