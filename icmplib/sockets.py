@@ -64,7 +64,7 @@ class ICMPSocket:
         socket.
 
     '''
-    __slots__ = '_sock', '_address', '_privileged', '_interface'
+    __slots__ = '_sock', '_address', '_privileged'
 
     _IP_VERSION              = -1
     _ICMP_HEADER_OFFSET      = -1
@@ -82,7 +82,6 @@ class ICMPSocket:
     def __init__(self, address=None, privileged=True, interface=None):
         self._sock = None
         self._address = address
-        self._interface = interface
 
         # The Linux kernel allows unprivileged users to use datagram
         # sockets (SOCK_DGRAM) to send ICMP requests. This feature is
